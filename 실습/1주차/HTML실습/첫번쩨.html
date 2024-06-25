@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>피로그래밍 첫번째!</title>
+    <style>
+        h1 { /* 선택자(selector) */
+            color: green; /* 속성(property): 값(value) */
+            color: #00b869; /* 네이버 */ 
+            background-color: lightyellow; /* 배경 색상 */
+            border: 2px solid darkgreen; /* 테두리 색상 */
+            text-shadow: 2px 2px 4px grey; /* 텍스트 그림자 색상 */
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); /* 박스 그림자 색상 */
+            opacity: 0.9; /* 투명도 */
+         }
+
+        #title-2 {
+            font-size: 2rem; /* 폰트 크기 */
+            font-family: 'Arial', sans-serif; /* 폰트 종류 */
+            font-weight: bold; /* 폰트 두께 */
+            font-style: italic; /* 폰트 스타일 */
+            text-transform: uppercase; /* 텍스트 변환 */
+            text-decoration: underline; /* 텍스트 장식 */
+            letter-spacing: 0.1rem; /* 글자 간격 */
+            line-height: 1.5; /* 줄 간격 */
+            text-align: center; /* 텍스트 정렬 */
+            color: green; /* 텍스트 색상 */
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3개의 동일한 너비의 열 */
+            gap: 10px;                             /* 아이템 간의 간격 */
+            height: 100vh;                         /* 화면 전체 높이 사용 */
+            background-color: #f0f0f0;
+            padding: 10px;
+        }
+        .item {
+            background-color: #4CAF50;
+            padding: 20px;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+        }
+
+      
+    </style>
+</head>
+<body>
+    <div><img src="https://pirogramming.com/static/images/icons/logo.svg" alt="예제 이미지"></div>
+    <h1 id="title-2" class="title-1 title3">Pirogramming</h1>
+    <h3 class="title-1">21기 강민석 입니다.</h3>
+
+    <div class="container">
+        <div class="item">Item 1</div>
+        <div class="item">Item 2</div>
+        <div class="item">Item 3</div>
+        <div class="item">Item 4</div>
+        <div class="item">Item 5</div>
+        <div class="item">Item 6</div>
+    </div>
+</body>
+</html>
