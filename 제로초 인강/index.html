@@ -85,7 +85,6 @@
         #wrap-center {
             width: 1280px;
             display: inline-block;
-            background-color: yellow;
         }
         #header {
             text-align: left;
@@ -185,11 +184,13 @@
                     text-align: left;
                 }
                 #search-svg {
-                    display: inline-block;
+                    display: inline-flex;
                     width: 67px;
                     margin-right: 12px;
                     height: 100%;
                     padding-left: 17px;
+                    justify-content: center;
+                    align-items: center;
                 }
                 #search-svg svg {
                     width: 24px;
@@ -198,8 +199,9 @@
                 }
                 #search-input {
                     width: 480px;
-                    height: 100%;
+                    height: 49px;
                     padding: 17px 0px;
+                    flex: 2;
                     font-size: 1.5em;
                     line-height: 24px;
                     font-weight: bold;
@@ -208,6 +210,14 @@
                 }
                 #search-right {
                     display: inline-block;
+                    flex: 1;
+                    display: inline-flex;
+                    align-items: stretch;
+                }
+                #search-keyboard, #search-recent, #search-button {
+                    background: transparent;
+                    border: none;
+                    cursor: pointer;
                 }
                 #search-keyboard::before {
                     content: "";
