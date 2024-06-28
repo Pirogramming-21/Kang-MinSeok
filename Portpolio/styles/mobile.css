@@ -1,0 +1,57 @@
+
+#hamburger-icon {
+    width: 30px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#hamburger-icon > div {
+    height: 3px;
+    background-color: white;
+    transition: 0.3s;
+}
+#hamburger-icon > input[type="checkbox"]:checked ~ div:nth-of-type(1){
+    transform: rotate(48deg);
+    transform-origin: 0 0;
+}
+#hamburger-icon > input[type="checkbox"]:checked ~ div:nth-of-type(2){
+    display: none;
+}
+#hamburger-icon > input[type="checkbox"]:checked ~ div:nth-of-type(3){
+    transform: rotate(-48deg);
+    transform-origin: 0 0;
+}
+
+@media screen and (min-width:768px) {
+    #hamburger-icon {
+        display: none;
+    }
+}
+@media screen and (max-width:768px) {
+    .main-header--container ul {
+        display: none;
+    }
+    .sidebar {
+        width: 250px;
+        z-index: 500;
+        height: calc(100vh - var(--header-height));
+        position: fixed;
+        background-color: #333333;
+        top: var(--header-height);
+        right: -300px;
+        transition: 0.3s;
+    }
+    .sidebar ul {
+        display: flex;
+        flex-direction: column;
+        font-size: 2.0rem;
+        gap: 40px;
+        text-align: end;
+        margin-top: 60px;
+        margin-right: 40px;
+    }
+    #hamburger-icon > input[type="checkbox"]:checked~.sidebar {
+        right: 0;
+    }
+}
