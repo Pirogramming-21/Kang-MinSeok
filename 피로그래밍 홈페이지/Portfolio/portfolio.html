@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./styles/variable.css">
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/mobile.css">
-    <link rel="stylesheet" href="./styles/portpolio.css">
+    <link rel="stylesheet" href="./styles/portfolio.css">
 </head>
 <body>
     <header id="main-header">
@@ -19,7 +19,7 @@
             <ul>
                 <li><a href="">Home</a></li>
                 <li><a href="">About Us</a></li>
-                <li><a href="">Portpolio</a></li>
+                <li class="selected"><a href="">Portfolio</a></li>
                 <li><a href="">Interview</a></li>
                 <li><a href="">Gallery</a></li>
                 <li><a href="">Recruit</a></li>
@@ -33,7 +33,7 @@
                     <ul>
                         <li><a href="">Home</a></li>
                         <li><a href="">About Us</a></li>
-                        <li><a href="">Portpolio</a></li>
+                        <li><a href="">Portfolio</a></li>
                         <li><a href="">Interview</a></li>
                         <li><a href="">Gallery</a></li>
                         <li><a href="">Recruit</a></li>
@@ -43,8 +43,8 @@
         </div>
     </header>
     <main>
-        <div class="portpolio">
-            <div id="portpolio-header">
+        <div class="portfolio">
+            <div id="portfolio-header">
                 <div class="header-left">
                     <a href="#">
                         <i id="prev"></i>
@@ -140,7 +140,7 @@
                     <img src="./images/TeskStock-logo397.png" alt="TaskStock 그림">
                 </div>
                 <div class="project-content">
-                    <div class="project-content--name">TaskStock/div>
+                    <div class="project-content--name">TaskStock</div>
                     <div class="project-content--intro">
                         <span>주식과 Todo 서비스를 결합한 웹 플랫폼</span>
                     </div>
@@ -153,8 +153,77 @@
                     </ul>
                 </div>
             </div>
+            <div class="project">
+                <div class="project-hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="project-pic">
+                    <img src="./images/Pirot-logo948.png" alt="Pirot 그림">
+                </div>
+                <div class="project-content">
+                    <div class="project-content--name">Priot</div>
+                    <div class="project-content--intro">
+                        <span>깔 - 끔한 업무용 채팅 웹 서비스, 피롯입니다.</span>
+                    </div>
+                    <ul class="project-content--team">
+                        <li class="team-leader">양원채</li>
+                        <li>김선우</li>
+                        <li>박석류</li>
+                        <li>장민서</li>
+                        <li>정혜인</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </main>
-    <footer></footer>
+    <footer id="footer-top">
+        <div class="footer-container">
+            <ul class="footer-contact">
+                <li>
+                    <a href="#">
+                        <div class="emoji">
+                            <img src="./images/kakao.svg" alt="카카오톡">
+                        </div>
+                        카카오톡 플러스 친구
+                    </a>
+                </li>
+            </ul>
+            <ul class="footer-contact">
+                <li>
+                    <a href="#">
+                        <div class="emoji">
+                            <img src="./images/instagram.svg" alt="인스타그램">
+                        </div>
+                        Instagram @pirogramming_official
+                    </a>
+                </li>
+            </ul>
+            <ul class="footer-contact">
+                <li>
+                    <a href="#">
+                        <div class="emoji">
+                            <img src="./images/gmail.svg" alt="gmail">
+                        </div>
+                        pirogramming.official@gmail.com
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <ul class="footer-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about/">About Us</a></li>
+            <li><a href="/portfolio/">Portfolio</a></li>
+            <li><a href="/interview/">Interview</a></li>
+            <li><a href="/gallery/">Gallery</a></li>
+            <li><a href="/recruit/">Recruit</a></li>
+        </ul>
+    </footer>
+    <footer id="footer-bottom">
+        <div class="footer-maxbottom">
+            <span>© Pirogramming. 2023 All rights reserved.</span>
+          </div>
+    </footer>
 </body>
 </html>

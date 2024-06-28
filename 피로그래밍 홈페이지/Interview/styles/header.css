@@ -23,10 +23,11 @@ main {
 }
 .main-header--container > ul {
     display: flex;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     gap: 2rem;
     z-index: 1000;
 }
-.main-header--container > ul > li:hover {
-    color: var(--green);
+.main-header--container ul li:hover {
+    position: relative;
+    top: -2px;
 }
