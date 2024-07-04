@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div>피로그래밍이 태어난 년도는?</div>
+    <input type="text" id="value-input">
+    <button id="submit-btn">버튼</button>
+    <script>
+        //버튼 태그 눌렀을 때 input값이 2014인지
+        //5회 이상인지
+        let count=0;
+        document.getElementById('submit-btn').addEventListener('click', function(){
+            count++;
+            console.log(count);
+            if(document.getElementById('value-input').value=='2014'){
+                alert("성공");
+            }else if(count >= 5){
+                alert("실패");
+            }
+        })
+    </script>
+    
+</body>
+</html>
