@@ -18,6 +18,10 @@ class Player:
             else:
                 print("정수를 입력하세요")
 
+        for i in range(count):
+            num += 1
+            print(f"{self.name} {num}")
+
 
 class Computer:
     def __init__(self):
