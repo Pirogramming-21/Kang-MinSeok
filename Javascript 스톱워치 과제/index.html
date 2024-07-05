@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/ff7a5a86fb.js" crossorigin="anonymous"></script>
+    <title>피로그래밍 스톱워치</title>
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+            <i class="fa-solid fa-stopwatch"></i>
+            <span>피로그래밍 스톱워치</span>
+        </div>
+        <div class="stopwatch">
+            <div class="stopwatch-body">
+                <div class="time-body">
+                    <p><span id="sec">00</span> : <span id="msec">00</span></p>
+                </div>
+                <div class="time-btn">
+                    <button class="btn" id="btn-start">start</button>
+                    <button class="btn" id="btn-stop">stop</button>
+                    <button class="btn" id="btn-reset">reset</button>
+                </div>
+            </div>
+        </div>
+        <div class="record">
+            <div class="record-header">
+                <input type="checkbox" class="record-check" id="check-all">
+                <span>구간 기록</span>
+                <button id="btn-delete">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+            <div class="record-main">
+                <ul class="record-list">
+                    <!-- <li>
+                        <div class="record-content">
+                            <input type="checkbox" class="record-check">
+                            <span>00 : 00</span>
+                        </div>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
