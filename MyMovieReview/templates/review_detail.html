@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        a {
+            text-decoration : none;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .header-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .header-container h1 {
+            margin: 0;
+            color: black;
+        }
+        .details-container, .content-container {
+            margin-top: 10px;
+        }
+        .details-container h3, .content-container h3 {
+            margin: 7px 0;
+        }
+        footer {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .footer-button {
+            text-decoration: none;
+            color: black;
+            background-color: white;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function datetime(minute) {
+            if (minute < 60) {
+                return minute + "분"
+            }
+            var hours = Math.floor(minute/60)
+            var minutes = Math.floor(minute%60)
+            return hours + "시간 " + minutes + "분";
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var runningTimeElement = document.getElementById("running-time");
+            var runningTime = parseInt(runningTimeElement.textContent, 10);
+            runningTimeElement.textContent = datetime(runningTime);
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header class="header-container">
+            <a href="/movie">
+                <h1>my Movie reviews</h1>
+            </a>
+        </header>
+        <h1>{{review.title}}</h1>
+        <div class="details-container">
+            <h3>감독: {{review.director}}</h3>
+            <h3>주연: {{review.actor}}</h3>
+            <h3>개봉년도: {{review.year}}</h3>
+            <h3>장르: {{review.genre}}</h3>
+            <h3>별점: {{review.rate}}</h3>
+            <h3>러닝타임: <span id="running-time">{{review.running_time}}</span></h3>
+        </div>
+        <div class="content-container">
+            <h2>{{review.content}}</h2>
+        </div>
+        <footer>
+            <a href="/movie/{{review.id}}/edit" id="edit">
+                <button type="submit" class="footer-button">수정</button>
+            </a>
+            <form action="/movie/{{review.id}}/delete" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="footer-button">삭제</button>
+            </form>              
+        </footer>
+    </div>
+</body>
+</html>
