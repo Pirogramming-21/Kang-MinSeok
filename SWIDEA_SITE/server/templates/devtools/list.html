@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block content%}
+<div class="main">
+    <div class="main-top">
+        <p>DevTool List</p>
+        <p>개발툴 목록 페이지 입니다. 개발툴의 목록을 확인해보세요</p>
+    </div>
+</div>
+<hr/>
+<div class="main-list">
+    {% for devtool in devtools %}
+    <div class="main-content">
+        <a href="{% url 'devtools:detail' devtool.pk %}" class="types">
+            {{devtool.types}}
+        </a>
+        <p class="name">{{devtool.name}}</p>
+        <p class="content"></p>{{devtool.content}}</p>
+        <button>star</button>
+    </div>
+    {% endfor %}
+</div>
+{%endblock%}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block content%}
+    <h1 style="color: white; font-size: 40px">{{devtool.types}}</h1>
+    <p>{{devtool.content}}</p>
+
+    <hr />  
+<div>
+    <p>만들 수 있는 SW 목록</p>
+    {% for idea in related_ideas %}
+    <a href="{% url 'ideas:detail' idea.pk %}" class="btn btn-success">
+        {{idea.title}}
+    </a>
+    {% endfor %}
+</div>
+
+<hr />
+<form action="{% url 'devtools:delete' devtool.pk %}" method="POST">
+  {%csrf_token%}
+  <a href="{% url 'devtools:edit' devtool.pk %}" class="btn btn-primary">수정하기</a>
+  <button type="submit" class="btn btn-danger">삭제하기</button>
+</form>
+{% endblock content %}

@@ -1,0 +1,124 @@
+/* styles.css */
+body {
+    background-color: #1d1f21;
+    color: #c5c6c7;
+    font-family: 'Arial', sans-serif;
+}
+
+img {
+    width: 50%;
+}
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #20232a;
+}
+
+.header-name a {
+    color: #61dafb;
+    font-size: 24px;
+    text-decoration: none;
+}
+.header-content > a{
+    margin: 0 20px;
+    text-decoration: none;
+}
+.header a {
+    color: #c5c6c7;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.header a:hover {
+    color: #61dafb;
+}
+
+.main {
+    padding: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.main-top {
+    text-align: center;
+}
+
+.main-top p:first-child {
+    font-size: 32px;
+    color: #61dafb;
+}
+
+.main-top p:last-child {
+    font-size: 18px;
+    color: #c5c6c7;
+}
+
+.main-mid {
+    position: absolute;
+    text-align: center;
+    margin: 20px 0;
+    right: 50px;
+}
+
+.main-mid select {
+    padding: 10px;
+    background-color: #20232a;
+    color: #c5c6c7;
+    border: 1px solid #61dafb;
+    border-radius: 5px;
+}
+
+.main-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.main-content {
+    background-color: #282c34;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    text-align: center;
+    width: 200px;
+}
+
+.main-content img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.info .title {
+    display: block;
+    font-size: 18px;
+    margin: 10px 0;
+    color: #61dafb;
+    text-decoration: none;
+}
+
+.info .title:hover {
+    color: #ffffff;
+}
+
+.info .region,
+.info .price {
+    margin: 5px 0;
+}
+
+.star-button {
+    background-color: #20232a;
+    color: #61dafb;
+    border: 1px solid #61dafb;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.star-button:hover {
+    background-color: #61dafb;
+    color: #20232a;
+}

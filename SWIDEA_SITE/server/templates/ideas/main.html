@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block content%}
+<div class="main">
+    <div class="main-top">
+        <p>Idea List</p>
+        <p>아이디어를 기록해보세요</p>
+    </div>
+    <div class="main-mid">
+        <select name="sort" id="sort" onchange="location = this.value;">
+            <option value="?sort=------">------</option>
+            <option value="?sort=관심도순">관심도순</option>
+            <option value="?sort=등록순">등록순</option>
+            <option value="?sort=최신순">최신순</option>
+        </select>
+    </div>
+</div>
+<hr/>
+<div class="main-list">
+    {% for idea in ideas %}
+    <div class="main-content">
+        {% if idea.image.url != null and idea.image.url != '' %}
+        <img src="{{idea.image.url}}" alt="대체텍스트">
+        {% else %}
+        <img src="{% static 'ideas/image/no_img.png' %}" alt="">
+        {% endif %}
+        <div class="info">
+            <a href="{% url 'ideas:detail' idea.pk%}" class="title">
+              {{idea.title}}
+            </a>
+            <p class="region">예상 개발 툴 : {{idea.devtool}}</p>
+            <p class="price">아이어어 관심도 : {{idea.interest}}</p>
+            <!-- main.html -->
+            <button class="star-button" data-id="{{ idea.pk }}">star</button>
+
+          </div>
+    </div>
+    {% endfor %}
+</div>
+{%endblock%}
