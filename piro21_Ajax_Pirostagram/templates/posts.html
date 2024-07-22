@@ -1,0 +1,208 @@
+{% load static %}
+
+{% block content %}
+<header>
+    <div class="post_header">
+        <p class="logo"></p>
+        <a href="{% url 'pirosta:create_post' %}">
+            <p>글쓰기</p>
+        </a>
+    </div>
+</header>
+<body>
+    {% for post in posts %}
+    <div class="post" id="post-{{ post.id }}">
+        <div class="post_header">
+            <div>
+                <img src="" alt="">
+                <p>{{ post.writer }}</p>
+            </div>
+            <div>...</div>
+        </div>
+        <div class="post_photo">
+            <img src="{{ post.photo.url }}" alt="...">
+        </div>
+        <div class="post_button">
+            <div class="main_button">
+                <div class="btn post__like">
+                    <input type="checkbox" id="liked_btn_{{ post.id }}" 
+                           onclick="onClickLike({{ post.id }})"
+                           {% if user in post.likedUser.all %} checked {% endif %}>
+                </div>
+                <div class="btn post_comment" onclick="toggleCommentForm({{ post.id }})">
+                    댓글 달기
+                </div>
+            <div class="saved_button"></div>
+        </div>
+        <div class="post_liked">좋아요 <span class="like_count">{{ post.likedUser.count }}</span></div>
+        <div class="post_content">{{ post.content }}</div>
+        <div class="post_comments">
+            <div>
+                댓글 <span id="comment-count-{{ post.id }}">{{ post.comments.count }}</span>개
+                <button id="toggle-comments-btn-{{ post.id }}" onclick="loadComments({{ post.id }})">댓글 더 보기</button>
+            </div>
+            <ul id="comments-{{ post.id }}" style="display: none;">
+                {% for comment in post.comments.all %}
+                <li id="comment-{{ comment.id }}">
+                    {{ comment.writer }}: {{ comment.content }}
+                    {% if comment.writer == user %}
+                    <button onclick="deleteComment({{ comment.id }}, {{ post.id }})">삭제</button>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            <form id="comment-form-{{ post.id }}" class="comment_form" style="display:none;" onsubmit="submitComment(event, {{ post.id }})">
+                <textarea name="content" id="comment-content-{{ post.id }}" cols="30" rows="2"></textarea>
+                <button type="submit">댓글 작성</button>
+            </form>
+        </div>
+    </div>
+    <hr/>
+    {% endfor %}
+</body>
+{% endblock %}
+
+{% block extra %}
+<script>
+    const onClickLike = (id) => {
+        const checkbox = document.getElementById(`liked_btn_${id}`);
+        const is_checked = checkbox.checked;
+        const url = "/like_ajax/";
+        const requestLike = new XMLHttpRequest();
+
+        requestLike.open("POST", url, true);
+        requestLike.setRequestHeader(
+            "Content-Type",
+            "application/json"
+        );
+        requestLike.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+        requestLike.send(JSON.stringify({id: id, is_checked: is_checked}));
+
+        requestLike.onreadystatechange = () => {
+            if (requestLike.readyState === XMLHttpRequest.DONE) {
+                if (requestLike.status < 400) {
+                    const { liked, is_checked } = JSON.parse(requestLike.response);
+                    const element = document.querySelector(`#post-${id} .like_count`);
+                    element.textContent = liked;
+                }
+            }
+        }
+    }
+
+    const toggleCommentForm = (id) => {
+        const form = document.getElementById(`comment-form-${id}`);
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    const submitComment = (event, id) => {
+        event.preventDefault();
+        const content = document.getElementById(`comment-content-${id}`).value;
+        const url = "/comment_ajax/";
+        const requestComment = new XMLHttpRequest();
+
+        requestComment.open("POST", url, true);
+        requestComment.setRequestHeader(
+            "Content-Type",
+            "application/json"
+        );
+        requestComment.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+        requestComment.send(JSON.stringify({id: id, content: content}));
+
+        requestComment.onreadystatechange = () => {
+            if (requestComment.readyState === XMLHttpRequest.DONE) {
+                if (requestComment.status < 400) {
+                    const { comment, writer, created_at } = JSON.parse(requestComment.response);
+                    const commentList = document.getElementById(`comments-${id}`);
+                    const newComment = document.createElement('li');
+                    newComment.textContent = `${writer}: ${comment} (${created_at})`;
+                    commentList.appendChild(newComment);
+                    document.getElementById(`comment-content-${id}`).value = '';
+                    toggleCommentForm(id);
+                }
+            }
+        }
+    }
+
+    const loadComments = (id) => {
+        const commentList = document.getElementById(`comments-${id}`);
+        const toggleButton = document.getElementById(`toggle-comments-btn-${id}`);
+        
+        if (commentList.style.display === 'none') {
+            const url = "/comment_ajax/";
+            const requestComments = new XMLHttpRequest();
+
+            requestComments.open("POST", url, true);
+            requestComments.setRequestHeader(
+                "Content-Type",
+                "application/json"
+            );
+            requestComments.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+            requestComments.send(JSON.stringify({id: id}));
+
+            requestComments.onreadystatechange = () => {
+                if (requestComments.readyState === XMLHttpRequest.DONE) {
+                    if (requestComments.status < 400) {
+                        const comments = JSON.parse(requestComments.response);
+                        commentList.innerHTML = '';
+                        comments.forEach(comment => {
+                            const newComment = document.createElement('li');
+                            newComment.id = `comment-${comment.id}`;
+                            newComment.innerHTML = `${comment.writer__username}: ${comment.content}`;
+                            if (comment.writer_id === {{ user.id }}) {
+                                newComment.innerHTML += ` <button onclick="deleteComment(${comment.id}, ${id})">삭제</button>`;
+                            }
+                            commentList.appendChild(newComment);
+                        });
+                        document.getElementById(`comment-count-${id}`).textContent = comments.length;
+                    }
+                }
+            }
+
+            commentList.style.display = 'block';
+            toggleButton.textContent = '댓글 접기';
+        } else {
+            commentList.style.display = 'none';
+            toggleButton.textContent = '댓글 더 보기';
+        }
+    }
+
+    const deleteComment = (commentId, postId) => {
+        const url = "/delete_comment_ajax/";
+        const requestDelete = new XMLHttpRequest();
+
+        requestDelete.open("POST", url, true);
+        requestDelete.setRequestHeader(
+            "Content-Type",
+            "application/json"
+        );
+        requestDelete.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+        requestDelete.send(JSON.stringify({comment_id: commentId}));
+
+        requestDelete.onreadystatechange = () => {
+            if (requestDelete.readyState === XMLHttpRequest.DONE) {
+                if (requestDelete.status < 400) {
+                    const commentElement = document.getElementById(`comment-${commentId}`);
+                    commentElement.remove();
+                    const commentCount = document.getElementById(`comment-count-${postId}`);
+                    commentCount.textContent = parseInt(commentCount.textContent) - 1;
+                }
+            }
+        }
+    }
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+{% endblock %}
