@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="yty_main-box">
+    <h2>로그인</h2>
+    <form method="POST" action="" id="yty_login-form">
+        {% csrf_token %}
+        {{ form }}
+        <button class="yty_btn">Login</button>
+        <a href="{% url 'pirosta:signup' %}">회원가입</a>
+    </form>
+</div>
+{% endblock %}

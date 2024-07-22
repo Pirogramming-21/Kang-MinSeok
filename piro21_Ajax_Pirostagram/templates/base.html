@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="{% static 'css/base.css' %}">
+   {% block head %}
+
+   {% endblock %}
+</head>
+
+<body>
+   <header>
+      <div class="nav_bar">
+         <div class="logo"><a href="{% url 'pirosta:posts' %}">Pirostagram</a></div>
+         <div class="login_and_signup">
+            {% if user.is_authenticated %}
+            <a href="{% url 'pirosta:logout' %}">로그아웃</a>
+            {% else %}
+            <a href="{% url 'pirosta:signup' %}">회원가입</a>
+            {% endif %}
+         </div>
+      </div>
+      <hr/>
+   </header>
+   <section>
+      {% block content %}
+
+      {% endblock %}
+   </section>
+   <footer>
+      <div class="group_num">@Pirostagram</div>
+   </footer>
+</body>
+<!-- <script src="{% static 'js/script.js' %}"></script> -->
+
+</html>

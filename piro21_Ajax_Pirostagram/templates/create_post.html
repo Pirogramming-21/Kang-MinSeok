@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="form__container">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="upload_image">
+                <h3>이미지 선택:</h3>
+                <input type="file" class="form-control" name="photo" id="imgfile">
+            </div>
+            <textarea name="content" cols="30" rows="10" placeholder="리뷰 내용"></textarea> <br/>
+            <button type="submit" class="yty_btn" id="yty_attack-btn">업로드 하기</button>
+        </form>
+    </div>
+{% endblock %}
